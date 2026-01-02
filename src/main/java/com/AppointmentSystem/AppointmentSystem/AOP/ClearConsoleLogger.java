@@ -88,7 +88,7 @@ public class ClearConsoleLogger {
             
             // Find where the error originated in YOUR code
             for (StackTraceElement element : e.getStackTrace()) {
-                if (element.getClassName().startsWith("com.appointment.system") &&
+                if (element.getClassName().startsWith("com.AppointmentSystem.AppointmentSystem") &&
                     !element.getClassName().contains("AOP")) {
                     String shortClassName = element.getClassName();
                     if (shortClassName.length() > 30) {

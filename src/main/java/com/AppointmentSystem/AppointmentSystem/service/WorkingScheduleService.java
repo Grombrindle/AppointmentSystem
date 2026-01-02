@@ -1,13 +1,13 @@
-package com.appointment.system.service;
+package com.AppointmentSystem.AppointmentSystem.service;
 
-import com.appointment.system.dto.Requests.WorkingScheduleRequestDTO;
-import com.appointment.system.dto.Responses.AvailableSlotResponse;
-import com.appointment.system.exception.BusinessException;
-import com.appointment.system.exception.NotFoundException;
-import com.appointment.system.model.User;
-import com.appointment.system.model.WorkingSchedule;
-import com.appointment.system.repository.UserRepository;
-import com.appointment.system.repository.WorkingScheduleRepository;
+import com.AppointmentSystem.AppointmentSystem.dto.Requests.WorkingScheduleRequestDTO;
+import com.AppointmentSystem.AppointmentSystem.dto.Responses.AvailableSlotResponse;
+import com.AppointmentSystem.AppointmentSystem.exception.BusinessException;
+import com.AppointmentSystem.AppointmentSystem.exception.NotFoundException;
+import com.AppointmentSystem.AppointmentSystem.model.User;
+import com.AppointmentSystem.AppointmentSystem.model.WorkingSchedule;
+import com.AppointmentSystem.AppointmentSystem.repository.UserRepository;
+import com.AppointmentSystem.AppointmentSystem.repository.WorkingScheduleRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.DayOfWeek;

@@ -1,4 +1,4 @@
-package com.appointment.system.dto.Responses;
+package com.AppointmentSystem.AppointmentSystem.dto.Responses;
 
 import lombok.Data;
 

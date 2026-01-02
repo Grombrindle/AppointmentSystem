@@ -1,6 +1,6 @@
 package com.AppointmentSystem.AppointmentSystem.controller;
 
-import com.aAppointmentSystem.AppointmentSystem.dto.Requests.AppointmentRequestDTO;
+import com.AppointmentSystem.AppointmentSystem.dto.Requests.AppointmentRequestDTO;
 import com.AppointmentSystem.AppointmentSystem.dto.Requests.UpdateAppointmentStatusRequestDTO;
 import com.AppointmentSystem.AppointmentSystem.dto.Responses.ApiResponse;
 import com.AppointmentSystem.AppointmentSystem.dto.Responses.AppointmentResponse;
@@ -8,7 +8,7 @@ import com.AppointmentSystem.AppointmentSystem.dto.Responses.AvailableSlotRespon
 import com.AppointmentSystem.AppointmentSystem.enums.AppointmentStatus;
 import com.AppointmentSystem.AppointmentSystem.exception.BusinessException;
 import com.AppointmentSystem.AppointmentSystem.exception.NotFoundException;
-import com.AppointmentSystem.AppointmentSystemmodel.Appointment;
+import com.AppointmentSystem.AppointmentSystem.model.Appointment;
 import com.AppointmentSystem.AppointmentSystem.service.AppointmentService;
 import com.AppointmentSystem.AppointmentSystem.service.UserService;
 import com.AppointmentSystem.AppointmentSystem.service.WorkingScheduleService;

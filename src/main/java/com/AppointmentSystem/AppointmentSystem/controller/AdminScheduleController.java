@@ -1,10 +1,10 @@
-package com.appointment.system.controller;
+package com.AppointmentSystem.AppointmentSystem.controller;
 
-import com.appointment.system.enums.UserRole;
-import com.appointment.system.model.User;
-import com.appointment.system.model.WorkingSchedule;
-import com.appointment.system.repository.UserRepository;
-import com.appointment.system.repository.WorkingScheduleRepository;
+import com.AppointmentSystem.AppointmentSystem.enums.UserRole;
+import com.AppointmentSystem.AppointmentSystem.model.User;
+import com.AppointmentSystem.AppointmentSystem.model.WorkingSchedule;
+import com.AppointmentSystem.AppointmentSystem.repository.UserRepository;
+import com.AppointmentSystem.AppointmentSystem.repository.WorkingScheduleRepository;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

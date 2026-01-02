@@ -1,4 +1,4 @@
-package com.appointment.system.dto.Requests;
+package com.AppointmentSystem.AppointmentSystem.dto.Requests;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

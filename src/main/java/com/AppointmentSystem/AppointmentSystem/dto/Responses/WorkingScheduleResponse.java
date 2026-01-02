@@ -1,6 +1,6 @@
-package com.appointment.system.dto.Responses;
+package com.AppointmentSystem.AppointmentSystem.dto.Responses;
 
-import com.appointment.system.model.WorkingSchedule;
+import com.AppointmentSystem.AppointmentSystem.model.WorkingSchedule;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

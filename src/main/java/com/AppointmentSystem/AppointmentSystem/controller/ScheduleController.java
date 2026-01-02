@@ -1,11 +1,11 @@
-package com.appointment.system.controller;
+package com.AppointmentSystem.AppointmentSystem.controller;
 
-import com.appointment.system.dto.Requests.WorkingScheduleRequestDTO;
-import com.appointment.system.dto.Responses.ApiResponse;
-import com.appointment.system.dto.Responses.AvailableSlotResponse;
-import com.appointment.system.dto.Responses.WorkingScheduleResponse;
-import com.appointment.system.model.WorkingSchedule;
-import com.appointment.system.service.WorkingScheduleService;
+import com.AppointmentSystem.AppointmentSystem.dto.Requests.WorkingScheduleRequestDTO;
+import com.AppointmentSystem.AppointmentSystem.dto.Responses.ApiResponse;
+import com.AppointmentSystem.AppointmentSystem.dto.Responses.AvailableSlotResponse;
+import com.AppointmentSystem.AppointmentSystem.dto.Responses.WorkingScheduleResponse;
+import com.AppointmentSystem.AppointmentSystem.model.WorkingSchedule;
+import com.AppointmentSystem.AppointmentSystem.service.WorkingScheduleService;
 import jakarta.validation.Valid;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
