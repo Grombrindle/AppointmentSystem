@@ -5,7 +5,7 @@ import com.AppointmentSystem.AppointmentSystem.dto.Responses.ApiResponse;
 import com.AppointmentSystem.AppointmentSystem.dto.Responses.AvailableSlotResponse;
 import com.AppointmentSystem.AppointmentSystem.dto.Responses.WorkingScheduleResponse;
 import com.AppointmentSystem.AppointmentSystem.model.WorkingSchedule;
-import com.AppointmentSystem.AppointmentSystem.service.WorkingScheduleService;
+import com.AppointmentSystem.AppointmentSystem.service.interfaces.*;
 import jakarta.validation.Valid;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -18,13 +18,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/schedule")
 public class ScheduleController extends BaseController {
-    
+
     private final WorkingScheduleService workingScheduleService;
-    
+
     public ScheduleController(WorkingScheduleService workingScheduleService) {
         this.workingScheduleService = workingScheduleService;
     }
-    
+
     @PostMapping
     @PreAuthorize("hasRole('ADMIN') or hasRole('STAFF')")
     public ResponseEntity<ApiResponse<WorkingScheduleResponse>> createSchedule(
@@ -32,7 +32,7 @@ public class ScheduleController extends BaseController {
         WorkingSchedule schedule = workingScheduleService.createSchedule(requestDTO);
         return created(WorkingScheduleResponse.from(schedule), "Working schedule created");
     }
-    
+
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN') or hasRole('STAFF')")
     public ResponseEntity<ApiResponse<WorkingScheduleResponse>> updateSchedule(
@@ -41,7 +41,7 @@ public class ScheduleController extends BaseController {
         WorkingSchedule schedule = workingScheduleService.updateSchedule(id, requestDTO);
         return ok(WorkingScheduleResponse.from(schedule), "Working schedule updated");
     }
-    
+
     @GetMapping("/staff/{staffId}")
     public ResponseEntity<ApiResponse<List<WorkingScheduleResponse>>> getStaffSchedules(
             @PathVariable Long staffId) {
@@ -50,7 +50,7 @@ public class ScheduleController extends BaseController {
                 .map(WorkingScheduleResponse::from).toList();
         return ok(response, "Staff schedules retrieved");
     }
-    
+
     @GetMapping("/available-slots")
     public ResponseEntity<ApiResponse<List<AvailableSlotResponse>>> getAvailableSlots(
             @RequestParam Long staffId,
@@ -60,7 +60,7 @@ public class ScheduleController extends BaseController {
                 .getAvailableSlots(staffId, serviceId, date);
         return ok(slots, "Available time slots retrieved");
     }
-    
+
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponse<Void>> deleteSchedule(@PathVariable Long id) {

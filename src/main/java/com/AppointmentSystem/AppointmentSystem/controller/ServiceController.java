@@ -4,7 +4,7 @@ import com.AppointmentSystem.AppointmentSystem.dto.Requests.ServiceRequestDTO;
 import com.AppointmentSystem.AppointmentSystem.dto.Responses.ApiResponse;
 import com.AppointmentSystem.AppointmentSystem.dto.Responses.ServiceResponse;
 import com.AppointmentSystem.AppointmentSystem.model.Service;
-import com.AppointmentSystem.AppointmentSystem.service.ServiceService;
+import com.AppointmentSystem.AppointmentSystem.service.interfaces.*;
 import jakarta.validation.Valid;
 
 import java.util.List;

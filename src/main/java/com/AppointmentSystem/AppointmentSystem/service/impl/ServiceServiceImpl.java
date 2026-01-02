@@ -1,31 +1,34 @@
-package com.AppointmentSystem.AppointmentSystem.service;
+package com.AppointmentSystem.AppointmentSystem.service.impl;
 
 import com.AppointmentSystem.AppointmentSystem.dto.Requests.ServiceRequestDTO;
+import com.AppointmentSystem.AppointmentSystem.enums.UserRole;
 import com.AppointmentSystem.AppointmentSystem.exception.NotFoundException;
 import com.AppointmentSystem.AppointmentSystem.exception.ValidationException;
 import com.AppointmentSystem.AppointmentSystem.model.Service;
 import com.AppointmentSystem.AppointmentSystem.model.User;
-import com.AppointmentSystem.AppointmentSystem.enums.UserRole;
 import com.AppointmentSystem.AppointmentSystem.repository.ServiceRepository;
 import com.AppointmentSystem.AppointmentSystem.repository.UserRepository;
+import com.AppointmentSystem.AppointmentSystem.service.interfaces.ServiceService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+// import Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @org.springframework.stereotype.Service
 @Transactional
-public class ServiceService {
+public class ServiceServiceImpl implements ServiceService {
 
     private final ServiceRepository serviceRepository;
     private final UserRepository userRepository;
 
-    public ServiceService(ServiceRepository serviceRepository, UserRepository userRepository) {
+    public ServiceServiceImpl(ServiceRepository serviceRepository, UserRepository userRepository) {
         this.serviceRepository = serviceRepository;
         this.userRepository = userRepository;
     }
 
+    @Override
     public Service createService(ServiceRequestDTO requestDTO) {
         User provider = userRepository.findById(requestDTO.getProviderId())
                 .orElseThrow(() -> new NotFoundException("Staff provider not found"));
@@ -45,6 +48,7 @@ public class ServiceService {
         return serviceRepository.save(service);
     }
 
+    @Override
     public Service updateService(Long id, ServiceRequestDTO requestDTO) {
         Service service = serviceRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Service not found"));
@@ -69,17 +73,19 @@ public class ServiceService {
         return serviceRepository.save(service);
     }
 
+    @Override
     public Service getServiceById(Long id) {
         return serviceRepository.findByIdAndIsActiveTrue(id)
                 .orElseThrow(() -> new NotFoundException("Service not found"));
     }
 
+    @Override
     public Page<Service> getAllActiveServices(Pageable pageable) {
         return serviceRepository.findByIsActiveTrue(pageable);
     }
 
+    @Override
     public List<Service> getServicesByProvider(Long providerId) {
-        // Optional: Validate provider is STAFF when fetching by provider
         User provider = userRepository.findById(providerId)
                 .orElseThrow(() -> new NotFoundException("Provider not found"));
 
@@ -90,6 +96,7 @@ public class ServiceService {
         return serviceRepository.findByProviderIdAndIsActiveTrue(providerId);
     }
 
+    @Override
     public void deactivateService(Long id) {
         Service service = serviceRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Service not found"));
@@ -97,14 +104,8 @@ public class ServiceService {
         serviceRepository.save(service);
     }
 
+    @Override
     public boolean isServiceAvailable(Long serviceId) {
         return serviceRepository.findByIdAndIsActiveTrue(serviceId).isPresent();
-    }
-
-    // Optional: Helper method to validate provider
-    private void validateProvider(User provider) {
-        if (provider.getRole() != UserRole.STAFF) {
-            throw new ValidationException("Provider must have STAFF role. User has role: " + provider.getRole());
-        }
     }
 }

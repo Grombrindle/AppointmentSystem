@@ -10,8 +10,8 @@ import com.AppointmentSystem.AppointmentSystem.dto.Responses.StaffResponse;
 import com.AppointmentSystem.AppointmentSystem.model.User;
 import com.AppointmentSystem.AppointmentSystem.repository.UserRepository;
 import com.AppointmentSystem.AppointmentSystem.security.JwtUtil;
-import com.AppointmentSystem.AppointmentSystem.service.CustomerService;
-import com.AppointmentSystem.AppointmentSystem.service.StaffService;
+import com.AppointmentSystem.AppointmentSystem.service.impl.*;
+import com.AppointmentSystem.AppointmentSystem.service.interfaces.*;
 
 import jakarta.validation.Valid;
 
@@ -31,122 +31,123 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController extends BaseController {
-    
+
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
     private final UserRepository userRepository;
     private final StaffService staffService;
     private final CustomerService customerService;
-    
-    public AuthController(AuthenticationManager authenticationManager, 
-                         JwtUtil jwtUtil,
-                         UserRepository userRepository,
-                         StaffService staffService,
-                         CustomerService customerService) {
+
+    public AuthController(AuthenticationManager authenticationManager,
+            JwtUtil jwtUtil,
+            UserRepository userRepository,
+            StaffService staffService,
+            CustomerService customerService) {
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
         this.userRepository = userRepository;
         this.staffService = staffService;
         this.customerService = customerService;
     }
-    
+
     // @PostMapping("/login")
-    // public ResponseEntity<ApiResponse<AuthResponse>> login(@RequestBody AuthRequest authRequest) {
-    //     try {
-    //         // Authenticate user
-    //         Authentication authentication = authenticationManager.authenticate(
-    //             new UsernamePasswordAuthenticationToken(
-    //                 authRequest.getEmail(),
-    //                 authRequest.getPassword()
-    //             )
-    //         );
-            
-    //         // Get user details
-    //         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-            
-    //         // Generate JWT token
-    //         String token = jwtUtil.generateToken(userDetails.getUsername());
-            
-    //         // Get user from database
-    //         User user = userRepository.findByEmail(userDetails.getUsername())
-    //                 .orElseThrow(() -> new RuntimeException("User not found"));
-            
-    //         // Create response
-    //         AuthResponse authResponse = new AuthResponse(
-    //             token,
-    //             user.getEmail(),
-    //             user.getRole().name(),
-    //             user.getId()
-    //         );
-            
-    //         return ok(authResponse, "Login successful");
-            
-    //     } catch (BadCredentialsException e) {
-    //         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-    //                 .body(new ApiResponse<>(false, null, 401, "Invalid email or password", "UNAUTHORIZED"));
-    //     } catch (Exception e) {
-    //         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-    //                 .body(new ApiResponse<>(false, null, 500, "Login failed: " + e.getMessage(), "INTERNAL_ERROR"));
-    //     }
+    // public ResponseEntity<ApiResponse<AuthResponse>> login(@RequestBody
+    // AuthRequest authRequest) {
+    // try {
+    // // Authenticate user
+    // Authentication authentication = authenticationManager.authenticate(
+    // new UsernamePasswordAuthenticationToken(
+    // authRequest.getEmail(),
+    // authRequest.getPassword()
+    // )
+    // );
+
+    // // Get user details
+    // UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+    // // Generate JWT token
+    // String token = jwtUtil.generateToken(userDetails.getUsername());
+
+    // // Get user from database
+    // User user = userRepository.findByEmail(userDetails.getUsername())
+    // .orElseThrow(() -> new RuntimeException("User not found"));
+
+    // // Create response
+    // AuthResponse authResponse = new AuthResponse(
+    // token,
+    // user.getEmail(),
+    // user.getRole().name(),
+    // user.getId()
+    // );
+
+    // return ok(authResponse, "Login successful");
+
+    // } catch (BadCredentialsException e) {
+    // return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+    // .body(new ApiResponse<>(false, null, 401, "Invalid email or password",
+    // "UNAUTHORIZED"));
+    // } catch (Exception e) {
+    // return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+    // .body(new ApiResponse<>(false, null, 500, "Login failed: " + e.getMessage(),
+    // "INTERNAL_ERROR"));
     // }
-    
+    // }
+
     @PostMapping("/login")
-public ResponseEntity<ApiResponse<AuthResponse>> login(@RequestBody AuthRequest authRequest) {
-    try {
-        Authentication authentication = authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(
-                authRequest.getEmail(),
-                authRequest.getPassword()
-            )
-        );
-        
-        // Create session for web users
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        
-        // Generate JWT token for API requests
-        String token = jwtUtil.generateToken(authentication.getName());
-        
-        User user = userRepository.findByEmail(authentication.getName())
-                .orElseThrow(() -> new RuntimeException("User not found"));
-        
-        AuthResponse authResponse = new AuthResponse(
-            token,
-            user.getEmail(),
-            user.getRole().name(),
-            user.getId()
-        );
-        
-        return ok(authResponse, "Login successful");
-        
-    } catch (BadCredentialsException e) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                .body(new ApiResponse<>(false, null, 401, "Invalid email or password", "UNAUTHORIZED"));
-    } catch (Exception e) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(new ApiResponse<>(false, null, 500, "Login failed: " + e.getMessage(), "INTERNAL_ERROR"));
+    public ResponseEntity<ApiResponse<AuthResponse>> login(@RequestBody AuthRequest authRequest) {
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            authRequest.getEmail(),
+                            authRequest.getPassword()));
+
+            // Create session for web users
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            // Generate JWT token for API requests
+            String token = jwtUtil.generateToken(authentication.getName());
+
+            User user = userRepository.findByEmail(authentication.getName())
+                    .orElseThrow(() -> new RuntimeException("User not found"));
+
+            AuthResponse authResponse = new AuthResponse(
+                    token,
+                    user.getEmail(),
+                    user.getRole().name(),
+                    user.getId());
+
+            return ok(authResponse, "Login successful");
+
+        } catch (BadCredentialsException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(new ApiResponse<>(false, null, 401, "Invalid email or password", "UNAUTHORIZED"));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponse<>(false, null, 500, "Login failed: " + e.getMessage(), "INTERNAL_ERROR"));
+        }
     }
-}
+
     @PostMapping("/register/staff")
-    public ResponseEntity<ApiResponse<StaffResponse>> registerStaff(@Valid @RequestBody StaffRegistrationRequest request) {
+    public ResponseEntity<ApiResponse<StaffResponse>> registerStaff(
+            @Valid @RequestBody StaffRegistrationRequest request) {
         User staffUser = staffService.registerStaff(
-            request.getName(),
-            request.getEmail(),
-            request.getPassword(),
-            request.getSpecialty(),
-            request.getLicenseNumber()
-        );
+                request.getName(),
+                request.getEmail(),
+                request.getPassword(),
+                request.getSpecialty(),
+                request.getLicenseNumber());
         return created(StaffResponse.fromUser(staffUser), "Staff member registered successfully");
     }
-    
+
     @PostMapping("/register/customer")
-    public ResponseEntity<ApiResponse<CustomerResponse>> registerCustomer(@Valid @RequestBody CustomerRegistrationRequest request) {
+    public ResponseEntity<ApiResponse<CustomerResponse>> registerCustomer(
+            @Valid @RequestBody CustomerRegistrationRequest request) {
         User customerUser = customerService.registerCustomer(
-            request.getName(),
-            request.getEmail(),
-            request.getPassword(),
-            request.getPhoneNumber(),
-            request.getAddress()
-        );
+                request.getName(),
+                request.getEmail(),
+                request.getPassword(),
+                request.getPhoneNumber(),
+                request.getAddress());
         return created(CustomerResponse.fromUser(customerUser), "Customer registered successfully");
     }
 }
