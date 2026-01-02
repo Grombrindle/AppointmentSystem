@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Appointment System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 250px;
+            background-color: #f8f9fa;
+            border-right: 1px solid #dee2e6;
+            z-index: 100;
+        }
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+        .nav-link {
+            color: #495057;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 2px 0;
+        }
+        .nav-link:hover {
+            background-color: #e9ecef;
+            color: #0d6efd;
+        }
+        .nav-link.active {
+            background-color: #0d6efd;
+            color: white;
+        }
+        .stat-card {
+            transition: transform 0.2s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .stat-card:hover .card {
+            border-color: #0d6efd !important;
+            box-shadow: 0 4px 15px rgba(13,109,239,0.2);
+        }
+        .badge-pending { background-color: #ffc107; color: #212529; }
+        .badge-approved { background-color: #28a745; }
+        .badge-cancelled { background-color: #dc3545; }
+        .badge-completed { background-color: #17a2b8; }
+        .activity-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.2s;
+        }
+        .activity-item:hover {
+            background-color: #f8f9fa;
+        }
+        .activity-icon {
+            font-size: 1.2rem;
+            margin-right: 8px;
+        }
+        .chart-container {
+            height: 250px;
+            position: relative;
+        }
+        .quick-action-btn {
+            transition: all 0.2s;
+        }
+        .quick-action-btn:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar d-flex flex-column">
+        <div class="p-3 border-bottom">
+            <h4 class="mb-0 text-primary">
+                <i class="bi bi-calendar-check"></i> Appointment System
+            </h4>
+            <small class="text-muted" sec:authentication="name"></small>
+        </div>
+        
+        <nav class="nav flex-column p-3">
+            <h6 class="text-uppercase text-muted mb-2">Navigation</h6>
+            <a href="/dashboard" class="nav-link active">
+                <i class="bi bi-house"></i> Dashboard
+            </a>
+            
+            <div sec:authorize="hasRole('ADMIN')">
+                <hr class="my-2">
+                <h6 class="text-uppercase text-muted mb-2">Admin Panel</h6>
+                <a href="/admin/users" class="nav-link">
+                    <i class="bi bi-people"></i> Manage Users
+                </a>
+                <a href="/admin/services" class="nav-link">
+                    <i class="bi bi-briefcase"></i> Manage Services
+                </a>
+                <a href="/admin/schedules" class="nav-link">
+                    <i class="bi bi-clock"></i> Working Schedules
+                </a>
+                <a href="/admin/appointments" class="nav-link">
+                    <i class="bi bi-calendar-event"></i> All Appointments
+                </a>
+            </div>
+            
+            
+            
+            <div class="mt-auto p-3">
+                <form th:action="@{/logout}" method="post" class="mb-0">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                    <button type="submit" class="btn btn-outline-danger w-100">
+                        <i class="bi bi-box-arrow-right"></i> Logout
+                    </button>
+                </form>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Bar -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1><i class="bi bi-speedometer2"></i> Admin Dashboard</h1>
+                <p class="text-muted">Welcome back, <span sec:authentication="name"></span>. Here's your system overview.</p>
+            </div>
+            <div class="badge bg-primary fs-6 p-2">
+                <i class="bi bi-person-badge me-1"></i> Role: <span sec:authentication="principal.authorities"></span>
+            </div>
+        </div>
+
+        <!-- Statistics Cards - Now Clickable -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <a href="/admin/users" class="stat-card text-decoration-none">
+                    <div class="card border-primary h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="text-muted mb-1">Total Users</h6>
+                                    <h3 class="mb-0" th:text="${totalUsers}">0</h3>
+                                    <small class="text-muted" th:text="${activeUsersCount} + ' active'">0 active</small>
+                                </div>
+                                <div class="bg-primary bg-opacity-10 p-3 rounded-circle">
+                                    <i class="bi bi-people text-primary" style="font-size: 1.8rem;"></i>
+                                </div>
+                            </div>
+                            <div class="mt-3 d-flex justify-content-between text-muted">
+                                <span>Admins: <span th:text="${adminCount}">0</span></span>
+                                <span>Staff: <span th:text="${staffCount}">0</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="col-md-3">
+                <a href="/admin/services" class="stat-card text-decoration-none">
+                    <div class="card border-success h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="text-muted mb-1">Active Services</h6>
+                                    <h3 class="mb-0" th:text="${activeServices}">0</h3>
+                                    <small class="text-muted" th:text="${totalServices} + ' total'">0 total</small>
+                                </div>
+                                <div class="bg-success bg-opacity-10 p-3 rounded-circle">
+                                    <i class="bi bi-briefcase text-success" style="font-size: 1.8rem;"></i>
+                                </div>
+                            </div>
+                            <div class="mt-3 d-flex justify-content-between text-muted">
+                                <span>Avg. Price: $<span th:text="${avgServicePrice}?.2f">0.00</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="col-md-3">
+                <a href="/admin/appointments?status=PENDING" class="stat-card text-decoration-none">
+                    <div class="card border-warning h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="text-muted mb-1">Pending Appointments</h6>
+                                    <h3 class="mb-0" th:text="${pendingAppointments}">0</h3>
+                                    <small class="text-muted" th:text="${upcomingAppointments} + ' upcoming'">0 upcoming</small>
+                                </div>
+                                <div class="bg-warning bg-opacity-10 p-3 rounded-circle">
+                                    <i class="bi bi-clock-history text-warning" style="font-size: 1.8rem;"></i>
+                                </div>
+                            </div>
+                            <div class="mt-3 d-flex justify-content-between text-muted">
+                                <span>Avg. Wait: <span th:text="${avgWaitTime}">0</span> hrs</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="col-md-3">
+                <a href="/admin/appointments?date=today" class="stat-card text-decoration-none">
+                    <div class="card border-info h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="text-muted mb-1">Today's Appointments</h6>
+                                    <h3 class="mb-0" th:text="${todaysAppointments}">0</h3>
+                                    <small class="text-muted" th:text="${todaysCompleted} + ' completed'">0 completed</small>
+                                </div>
+                                <div class="bg-info bg-opacity-10 p-3 rounded-circle">
+                                    <i class="bi bi-calendar-day text-info" style="font-size: 1.8rem;"></i>
+                                </div>
+                            </div>
+                            <div class="mt-3 d-flex justify-content-between text-muted">
+                                <span>Revenue: $<span th:text="${todaysRevenue}?.2f">0.00</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Admin Quick Actions -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0"><i class="bi bi-lightning"></i> Quick Actions</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <a href="/admin/users" class="btn btn-outline-primary w-100 mb-2 quick-action-btn">
+                                    <i class="bi bi-person-plus me-1"></i> Manage Users
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <a href="/admin/services" class="btn btn-outline-primary w-100 mb-2 quick-action-btn">
+                                    <i class="bi bi-plus-circle me-1"></i> Manage Services
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <a href="/admin/appointments" class="btn btn-outline-primary w-100 mb-2 quick-action-btn">
+                                    <i class="bi bi-eye me-1"></i> View All Appointments
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <a href="/admin/schedules" class="btn btn-outline-primary w-100 quick-action-btn">
+                                    <i class="bi bi-calendar-week me-1"></i> Manage Schedules
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-warning text-white">
+                        <h5 class="mb-0"><i class="bi bi-graph-up"></i> System Status</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between mb-1">
+                                <span>System Uptime</span>
+                                <span th:text="${systemUptime}">99.9%</span>
+                            </div>
+                            <div class="progress" style="height: 8px;">
+                                <div class="progress-bar bg-success" role="progressbar" th:style="'width: ' + ${systemUptimePercentage} + '%'" th:aria-valuenow="${systemUptimePercentage}" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between mb-1">
+                                <span>Database Health</span>
+                                <span th:text="${databaseHealth}">Excellent</span>
+                            </div>
+                            <div class="progress" style="height: 8px;">
+                                <div class="progress-bar" th:class="${databaseHealthColor}" role="progressbar" th:style="'width: ' + ${databaseHealthPercentage} + '%'" th:aria-valuenow="${databaseHealthPercentage}" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between small text-muted mt-3">
+                            <span><i class="bi bi-server me-1"></i> Server Load: <span th:text="${serverLoad}">30%</span></span>
+                            <span><i class="bi bi-database me-1"></i> DB Connections: <span th:text="${dbConnections}">12/50</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Appointments Table -->
+        <div class="card mt-4">
+            <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
+                <h5 class="mb-0"><i class="bi bi-clock-history me-2"></i> Recent Appointments</h5>
+                <span class="badge bg-light text-dark" th:text="'Total: ' + ${recentAppointments.size()}">Total: 0</span>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>ID</th>
+                                <th>Customer</th>
+                                <th>Service</th>
+                                <th>Staff</th>
+                                <th>Date & Time</th>
+                                <th>Duration</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="appointment : ${recentAppointments}" th:id="'appointment-' + ${appointment.id}">
+                                <td th:text="${appointment.id}">#123</td>
+                                <td>
+                                    <div>
+                                        <strong th:text="${appointment.customer.name}">John Doe</strong>
+                                        <br>
+                                        <small class="text-muted" th:text="${appointment.customer.email}">john@example.com</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <strong th:text="${appointment.service.name}">Dental Cleaning</strong>
+                                        <br>
+                                        <small class="text-muted" th:text="'$' + ${#numbers.formatDecimal(appointment.service.price, 1, 2)}">$120.00</small>
+                                    </div>
+                                </td>
+                                <td th:text="${appointment.staff.name}">Dr. Smith</td>
+                                <td>
+                                    <div th:text="${#temporals.format(appointment.appointmentDateTime, 'MMM dd, yyyy')}">Dec 01, 2023</div>
+                                    <small class="text-muted" th:text="${#temporals.format(appointment.appointmentDateTime, 'HH:mm')}">10:00 AM</small>
+                                </td>
+                                <td th:text="${appointment.service.duration} + ' min'">60 min</td>
+                                <td>
+                                    <span th:class="${appointment.status.name() == 'PENDING' ? 'badge badge-pending' : 
+                                                    appointment.status.name() == 'APPROVED' ? 'badge badge-approved' :
+                                                    appointment.status.name() == 'CANCELLED' ? 'badge badge-cancelled' : 'badge badge-completed'}"
+                                          th:text="${appointment.status.name()}">
+                                        Confirmed
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a th:href="@{/admin/appointments/{id}(id=${appointment.id})}" 
+                                           class="btn btn-sm btn-info" 
+                                           th:title="'View details for appointment #' + ${appointment.id}">
+                                            <i class="bi bi-eye"></i> View
+                                        </a>
+                                        <button class="btn btn-sm btn-primary dropdown-toggle" 
+                                                type="button" 
+                                                data-bs-toggle="dropdown" 
+                                                aria-expanded="false">
+                                            <i class="bi bi-three-dots"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item text-success" href="#"><i class="bi bi-check-circle me-2"></i>Approve</a></li>
+                                            <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-x-circle me-2"></i>Cancel</a></li>
+                                            <li><a class="dropdown-item text-info" href="#"><i class="bi bi-pencil me-2"></i>Edit</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr th:if="${recentAppointments.empty}">
+                                <td colspan="8" class="text-center py-4">
+                                    <div class="text-muted">
+                                        <i class="bi bi-calendar-x h1 mb-3"></i>
+                                        <p>No recent appointments found</p>
+                                        <a href="/admin/appointments" class="btn btn-primary mt-2">
+                                            <i class="bi bi-plus-circle me-1"></i> View All Appointments
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Appointment Detail Modal (for dynamic loading) -->
+    <div class="modal fade" id="appointmentDetailModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title">Appointment Details <span id="modalAppointmentId">#123</span></h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="appointmentDetails">
+                    <div class="text-center py-5">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="mt-2 text-muted">Loading appointment details...</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Print Receipt</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Initialize tooltips
+        document.addEventListener('DOMContentLoaded', function() {
+            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+            
+            // Add click animation to cards
+            document.querySelectorAll('.stat-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    this.querySelector('.card').classList.add('border-2');
+                });
+            });
+            
+            // Appointment detail modal
+            const appointmentDetailModal = document.getElementById('appointmentDetailModal');
+            if (appointmentDetailModal) {
+                appointmentDetailModal.addEventListener('show.bs.modal', function(event) {
+                    const button = event.relatedTarget;
+                    const appointmentId = button.getAttribute('data-id');
+                    const modalTitle = document.getElementById('modalAppointmentId');
+                    const detailsContainer = document.getElementById('appointmentDetails');
+                    
+                    modalTitle.textContent = '#' + appointmentId;
+                    
+                    // Simulate API call to get appointment details
+                                        setTimeout(() => {
+                                            detailsContainer.innerHTML = `
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="card mb-3">
+                                                            <div class="card-header bg-light">
+                                                                <h6 class="mb-0"><i class="bi bi-person"></i> Customer Information</h6>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <p><strong>Name:</strong> <span id="customerName">John Doe</span></p>
+                                                                <p><strong>Email:</strong> <span id="customerEmail">john@example.com</span></p>
+                                                                <p><strong>Phone:</strong> <span id="customerPhone">+1-555-0123</span></p>
+                                                                <p><strong>Role:</strong> <span id="customerRole">CUSTOMER</span></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="card mb-3">
+                                                            <div class="card-header bg-light">
+                                                                <h6 class="mb-0"><i class="bi bi-briefcase"></i> Service Details</h6>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <p><strong>Service:</strong> <span id="serviceName">Dental Cleaning</span></p>
+                                                                <p><strong>Duration:</strong> <span id="serviceDuration">60</span> minutes</p>
+                                                                <p><strong>Price:</strong> $<span id="servicePrice">120.00</span></p>
+                                                                <p><strong>Provider:</strong> <span id="staffName">Dr. Smith</span></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-3">
+                                                    <div class="col-12">
+                                                        <div class="card">
+                                                            <div class="card-header bg-light">
+                                                                <h6 class="mb-0"><i class="bi bi-calendar-event"></i> Appointment Details</h6>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <p><strong>Appointment Date:</strong> <span id="appointmentDate">2023-12-01</span></p>
+                                                                        <p><strong>Start Time:</strong> <span id="startTime">10:00 AM</span></p>
+                                                                        <p><strong>End Time:</strong> <span id="endTime">11:00 AM</span></p>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <p><strong>Status:</strong> <span id="appointmentStatus" class="badge bg-success">APPROVED</span></p>
+                                                                        <p><strong>Created At:</strong> <span id="createdAt">2023-11-15 14:30</span></p>
+                                                                        <p><strong>Last Updated:</strong> <span id="updatedAt">2023-11-15 14:30</span></p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mt-3">
+                                                                    <h6><i class="bi bi-chat-left-text"></i> Notes</h6>
+                                                                    <p id="notes" class="mb-0">Regular checkup and cleaning</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            `;
+                                        }, 300);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
