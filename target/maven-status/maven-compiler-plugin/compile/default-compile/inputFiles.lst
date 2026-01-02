@@ -1,38 +1,63 @@
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/AOP/ClearConsoleLogger.java
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/AppointmentSystemApplication.java
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/advice/GlobalExceptionHandler.java
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/config/DataLoader.java
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/config/HttpsConfig.java
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/config/PasswordConfig.java
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/controller/AuthController.java
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/controller/BaseController.java
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/controller/DashboardController.java
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/controller/HomeController.java
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/controller/ServiceController.java
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/controller/StaffController.java
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/controller/UserController.java
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/controller/WebController.java
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/dto/Requests/AuthRequest.java
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/dto/Requests/CustomerRegistrationRequest.java
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/dto/Requests/LoginRequestDTO.java
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/dto/Requests/ServiceRequestDTO.java
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/dto/Requests/StaffRegistrationRequest.java
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/dto/Requests/UserRequest.java
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/dto/Responses/ApiResponse.java
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/dto/Responses/AuthResponse.java
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/dto/Responses/CustomerResponse.java
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/dto/Responses/ServiceResponse.java
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/dto/Responses/StaffResponse.java
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/dto/Responses/UserResponse.java
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/enums/UserRole.java
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/exception/BusinessException.java
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/exception/NotFoundException.java
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/exception/ValidationException.java
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/model/Service.java
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/model/User.java
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/repository/ServiceRepository.java
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/repository/UserRepository.java
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/service/CustomerService.java
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/service/ServiceService.java
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/service/StaffService.java
-/home/batool/Work/final/AppointmentSystem/src/main/java/com/AppointmentSystem/AppointmentSystem/service/UserService.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\advice\GlobalExceptionHandler.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\AOP\ClearConsoleLogger.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\AppointmentSystemApplication.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\config\DataLoader.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\config\HttpsConfig.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\config\PasswordConfig.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\config\WebSocketConfig.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\controller\AdminAppointmentController.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\controller\AdminScheduleController.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\controller\AppointmentController.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\controller\AuthController.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\controller\BaseController.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\controller\DashboardController.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\controller\HomeController.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\controller\ScheduleController.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\controller\ServiceController.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\controller\StaffController.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\controller\UserController.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\controller\WebController.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\dto\Requests\AppointmentRequestDTO.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\dto\Requests\AuthRequest.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\dto\Requests\CustomerRegistrationRequest.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\dto\Requests\LoginRequestDTO.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\dto\Requests\ServiceRequestDTO.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\dto\Requests\StaffRegistrationRequest.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\dto\Requests\UpdateAppointmentStatusRequestDTO.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\dto\Requests\UserRequest.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\dto\Requests\WorkingScheduleRequestDTO.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\dto\Responses\ApiResponse.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\dto\Responses\AppointmentResponse.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\dto\Responses\AuthResponse.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\dto\Responses\AvailableSlotResponse.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\dto\Responses\CustomerResponse.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\dto\Responses\ServiceResponse.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\dto\Responses\StaffResponse.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\dto\Responses\UserResponse.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\dto\Responses\WorkingScheduleResponse.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\enums\AppointmentStatus.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\enums\UserRole.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\exception\BusinessException.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\exception\NotFoundException.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\exception\ValidationException.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\model\Appointment.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\model\NotificationMessage.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\model\Service.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\model\User.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\model\WorkingSchedule.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\repository\AppointmentRepository.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\repository\ServiceRepository.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\repository\UserRepository.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\repository\WorkingScheduleRepository.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\security\CustomUserDetailsService.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\security\JwtAuthenticationFilter.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\security\JwtUtil.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\security\SecurityConfig.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\service\AppointmentService.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\service\CustomerService.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\service\impl\WebSocketNotificationServiceImpl.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\service\interfaces\WebSocketNotificationService.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\service\ServiceService.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\service\StaffService.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\service\UserService.java
+C:\Users\LENOVO LOQ\myGit\AppointmentSystem\src\main\java\com\AppointmentSystem\AppointmentSystem\service\WorkingScheduleService.java

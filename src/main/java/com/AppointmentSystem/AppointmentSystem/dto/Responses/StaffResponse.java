@@ -1,6 +1,5 @@
 package com.AppointmentSystem.AppointmentSystem.dto.Responses;
 
-import com.AppointmentSystem.AppointmentSystem.enums.UserRole;
 import lombok.Data;
 
 @Data
