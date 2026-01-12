@@ -1,0 +1,5 @@
+gemini:
+  enabled: true
+  api:
+    url: https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent
+    key: ${GEMINI_API_KEY:}
