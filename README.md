@@ -1,13 +1,19 @@
-                                                                    # Appointment System
-
-حيدرة أكثم علي -
-بتول لؤي منصور -
-نور ابراهيم الكفري -
-أحمد عماد يونس
+# Appointment System
 
 ## Project Overview
 
 The Appointment System is a robust web application designed to streamline the process of scheduling and managing appointments. Built with Spring Boot, it provides a comprehensive backend solution for various user roles, including administrators, staff, and customers. The system aims to prevent scheduling conflicts, manage services, and facilitate efficient communication through notifications. It incorporates modern security practices, such as JWT-based authentication, and leverages WebSocket for real-time updates. A notable feature is the integration with Google Gemini AI for intelligent appointment suggestions.
+
+## Team Contributions
+
+This project was developed collaboratively by the following team members, with each member taking primary responsibility for specific modules:
+
+*   **حيدرة أكثم علي (Haidara Aktham Ali)**: Led the development of the **User** module, including its models, services, controllers, DTOs, repositories, and associated HTML files.
+*   **بتول لؤي منصور (Batoul Loay Mansour)**: Responsible for the **Service** module, encompassing its models, services, controllers, DTOs, repositories, and corresponding HTML files.
+*   **أحمد عماد يونس (Ahmed Emad Younis)**: Developed the **Schedule** module, including its models, services, controllers, DTOs, repositories, and related HTML files.
+*   **نور ابراهيم الكفري (Noor Ibrahim Al-Kafri)**: Focused on the **Appointment** module, handling its models, services, controllers, DTOs, repositories, and dedicated HTML files.
+
+All team members contributed to the overall project configuration, security setup, and other cross-cutting concerns to ensure a cohesive and functional application.
 
 ## Features
 
@@ -121,10 +127,6 @@ The API is structured around RESTful principles, providing clear and consistent 
 *   Staff can manage their schedules and view appointments.
 *   Customers can book and manage their appointments.
 *   Utilize the `/api/ai/suggest` endpoint to get AI-powered appointment suggestions.
-
-## Contribution
-
-Contributions are welcome! Please follow standard Git practices for feature branches and pull requests.
 
 ## License
 
