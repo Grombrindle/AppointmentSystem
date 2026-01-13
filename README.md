@@ -9,7 +9,7 @@ The Appointment System is a robust web application designed to streamline the pr
 This project was developed collaboratively by the following team members, with each member taking primary responsibility for specific modules:
 
 *   **حيدرة أكثم علي (Haidara Aktham Ali)**: Led the development of the **User** module, including its models, services, controllers, DTOs, repositories, and associated HTML files.
-*   **بتول لؤي منصور (Batoul Loay Mansour)**: Responsible for the **Service** module, encompassing its models, services, controllers, DTOs, repositories, and corresponding HTML files.
+*   **بتول لؤي منصور (Batool Louy Mansour)**: Responsible for the **Service** module, encompassing its models, services, controllers, DTOs, repositories, and corresponding HTML files.
 *   **أحمد عماد يونس (Ahmed Emad Younis)**: Developed the **Schedule** module, including its models, services, controllers, DTOs, repositories, and related HTML files.
 *   **نور ابراهيم الكفري (Noor Ibrahim Al-Kafri)**: Focused on the **Appointment** module, handling its models, services, controllers, DTOs, repositories, and dedicated HTML files.
 
